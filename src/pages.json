@@ -2,43 +2,50 @@
 	"pages": [{
 		"path": "pages/home/index",
 		"style": {
-			"navigationBarTitleText": "Celery",
+			"navigationBarTitleText": "首页",
 			"navigationStyle": "custom"
 		}
 	}, {
 		"path": "pages/my/index",
 		"style": {
+			"navigationBarTitleText": "我的",
 			"navigationStyle": "custom"
 		}
 	}, {
 		"path": "pages/my/info",
 		"style": {
-			"navigationBarTitleText": "个人资料"
+			"navigationBarTitleText": "个人资料",
+			"navigationStyle": "custom"
 		}
 	}, {
 		"path": "pages/my/register",
 		"style": {
-			"navigationBarTitleText": "注册信息"
+			"navigationBarTitleText": "注册信息",
+			"navigationStyle": "custom"
 		}
 	}, {
 		"path": "pages/my/login",
 		"style": {
-			"navigationBarTitleText": "登录"
+			"navigationBarTitleText": "登录",
+			"navigationStyle": "custom"
 		}
 	}, {
 		"path": "pages/order/index",
 		"style": {
-			"navigationBarTitleText": "区间选择"
+			"navigationBarTitleText": "区间选择",
+			"navigationStyle": "custom"
 		}
 	}, {
 		"path": "pages/order/chooseTime",
 		"style": {
-			"navigationBarTitleText": "时间选择"
+			"navigationBarTitleText": "时间选择",
+			"navigationStyle": "custom"
 		}
 	}, {
 		"path": "pages/order/submit",
 		"style": {
-			"navigationBarTitleText": "班车预约"
+			"navigationBarTitleText": "班车预约",
+			"navigationStyle": "custom"
 		}
 	}],
 	"tabBar": {
@@ -62,7 +69,7 @@
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "班车预约",
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#FDFDFD"
 	}

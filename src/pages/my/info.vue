@@ -22,31 +22,10 @@
 					<input type="text" v-model="form.phone" disabled="disabled" />
 				</view>
 			</list-cell>
-			<list-cell line-right padding="30rpx">
-				<view class="form-item">
-					<view class="label">性别</view>
-					<view class="radio" @tap="form.sex = 1">
-						<image :src="!form.sex ? '/static/images/common/gouxuankuang.png' : '/static/images/common/round-black-selected.png'"></image>
-						<view>男</view>
-					</view>
-					<view class="radio" @tap="form.sex = 0">
-						<image :src="form.sex ? '/static/images/common/gouxuankuang.png' : '/static/images/common/round-black-selected.png'"></image>
-						<view>女</view>
-					</view>
-				</view>
-			</list-cell>
-			<list-cell line-right padding="30rpx" last>
-				<view class="form-item">
-					<view class="label">生日</view>
-					 <picker class="flex-fill" mode="date" :value="form.birthday" disabled="true">
-						<view><text style="color: lightgray">{{ form.birthday }}</text></view>
-					</picker>
-				</view>
-			</list-cell>
 		</view>
 
 		<view class="save-btn">
-			<button type="info">保存</button>
+			<button type="info">解除绑定</button>
 		</view>
 	</view>
 </template>
@@ -124,16 +103,6 @@
 
 		input {
 			flex: 1;
-		}
-
-		.radio {
-			display: flex;
-			margin-right: 50rpx;
-			image {
-				width: 40rpx;
-				height: 40rpx;
-				margin-right: 20rpx;
-			}
 		}
 	}
 }

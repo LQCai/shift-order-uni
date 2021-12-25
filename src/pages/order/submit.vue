@@ -64,7 +64,7 @@
         this.form.date = date.toISOString().slice(0, 10)
       },
       submit () {
-
+        console.log(this.form)
       }
 		}
 	}
