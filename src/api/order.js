@@ -8,3 +8,11 @@ export function intervalList() {
     method: 'GET'
   })
 }
+
+export function shiftList(query) {
+  return vue.$fly.request({
+    url: `/order/shift-list`,
+    method: 'GET',
+    params: query
+  })
+}

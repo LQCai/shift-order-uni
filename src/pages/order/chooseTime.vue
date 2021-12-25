@@ -1,35 +1,40 @@
 <template>
 	<view class="container">
-    <list-cell class="cell" v-for="interval in intervalList">
-      <view class="item" @tap="chooseTime(interval)">
-        <view class="wenyue-font">{{ interval.name }}</view>
+    <list-cell class="cell">
+      <view> {{ intervalName }} </view>
+    </list-cell>
+    <list-cell class="cell" v-for="shift in shiftList">
+      <view class="item" @tap="submit(shift)">
+        <view class="wenyue-font">{{ shift.startTime }}</view>
       </view>
     </list-cell>
 	</view>
 </template>
 
 <script>
-  import {intervalList} from "../../api/order";
+import {shiftList} from "../../api/order";
   import ListCell from "../../components/list-cell/list-cell";
 
   export default {
     components: {ListCell},
     data() {
 			return {
-        intervalList: []
+        intervalName: "",
+        shiftList: []
 			}
 		},
-    onLoad() {
-      intervalList().then(res => {
-        this.intervalList = res.data
+    onLoad(options) {
+      this.intervalName = options.name
+      shiftList({intervalId: options.id}).then(res => {
+        this.shiftList = res.data
       }).catch(err => {
         // ...
       })
     },
 		methods: {
-      chooseTime(interval) {
+      submit(shift) {
         uni.navigateTo({
-          url: `/pages/order/chooseTime?id=${interval.id}&name=${interval.name}`,
+          url: `/pages/order/submit?id=${shift.id}&time=${shift.startTime}&intervalName=${this.intervalName}`
         })
       }
 		}

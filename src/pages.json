@@ -25,10 +25,20 @@
 		"style": {
 			"navigationBarTitleText": "登录"
 		}
-	},{
+	}, {
 		"path": "pages/order/index",
 		"style": {
 			"navigationBarTitleText": "区间选择"
+		}
+	}, {
+		"path": "pages/order/chooseTime",
+		"style": {
+			"navigationBarTitleText": "时间选择"
+		}
+	}, {
+		"path": "pages/order/submit",
+		"style": {
+			"navigationBarTitleText": "班车预约"
 		}
 	}],
 	"tabBar": {
