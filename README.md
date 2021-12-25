@@ -1,10 +1,10 @@
 ### 简介
 
-uniapp开发的在线点餐多商户应用
+uniapp开发的班车预约应用
 
-服务端地址: https://gitee.com/llqcai/celery-server
+服务端地址: https://github.com/LQCai/shift-order-server
 
-管理后台地址: https://gitee.com/llqcai/celery-admin
+管理后台地址: https://github.com/LQCai/shift-order-admin
 
 ### 说明
 
@@ -13,8 +13,6 @@ uniapp开发的在线点餐多商户应用
 本项目包含：
 
 - 首页
-- 点单
-- 历史订单
+- 预约
+- 预约记录
 - 我的
-- 我的-微信一键登录
-- 我的-个人资料
