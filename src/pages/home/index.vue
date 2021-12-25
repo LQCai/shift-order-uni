@@ -10,20 +10,15 @@
 		<view class="content">
 			<!-- section-1 begin -->
 			<view class="section-1">
-        <view class="item" @tap.stop="eatIn">
+        <view class="item" @tap.stop="order">
           <image src="/static/images/home/home_icon_eatin.png" mode="widthFix"></image>
-          <view class="wenyue-font">堂食</view>
+          <view class="wenyue-font">开始预约</view>
         </view>
-        <navigator class="item" open-type="switchTab" url="/pages/index/index" hover-class="none">
-          <image src="/static/images/home/home_icon_ziqu1.png" mode="widthFix"></image>
-          <view class="wenyue-font">自取</view>
+        <navigator class="item" open-type="navigate" url="/pages/addresses/addresses" hover-class="none">
+          <image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
+          <view class="wenyue-font">预约记录</view>
         </navigator>
-				<navigator class="item" open-type="navigate" url="/pages/addresses/addresses" hover-class="none">
-					<image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
-					<view class="wenyue-font">外送</view>
-				</navigator>
 			</view>
-			<!-- section-2 end -->
 		</view>
 	</view>
 </template>
@@ -44,17 +39,14 @@
       this.loginInfo = uni.getStorageSync('loginInfo')
       if (this.loginInfo === {} || this.loginInfo === '') {
         uni.switchTab({
-          url: '/pages/my/my'
+          url: '/pages/my/index'
         })
       }
     },
 		methods: {
-      eatIn () {
-        uni.scanCode({
-          success: function (res) {
-            console.log('条码类型：' + res.scanType);
-            console.log('条码内容：' + res.result);
-          }
+      order () {
+        uni.navigateTo({
+          url: "/pages/order/index"
         })
       }
 		}
@@ -110,16 +102,6 @@
 				width: 2rpx;
 				background-color: $border-color;
 			}
-
-      &:nth-child(2):after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: 2rpx;
-        background-color: $border-color;
-      }
 
 			image {
 				width: 100rpx;

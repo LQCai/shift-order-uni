@@ -4,7 +4,7 @@
 			<list-cell line-right padding="30rpx">
 				<view class="form-item">
 					<view class="label">账号</view>
-					<input type="text" v-model="form.account" placeholder="请输入账号/手机号码" @change="handleAccountChange" />
+					<input type="text" v-model="form.account" placeholder="请输入账号" @change="handleAccountChange" />
 				</view>
 			</list-cell>
       <list-cell line-right padding="30rpx">
@@ -76,7 +76,7 @@
             icon: 'none'
           })
           uni.switchTab({
-            url: '/pages/home/home'
+            url: '/pages/home/index'
           })
         }).catch((e) => {
           console.log(e)
