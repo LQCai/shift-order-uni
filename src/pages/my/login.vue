@@ -79,9 +79,12 @@
             title: '登录成功!',
             icon: 'none'
           })
-          uni.switchTab({
-            url: '/pages/home/index'
-          })
+          setTimeout(() => {
+            uni.hideToast()
+            uni.switchTab({
+              url: '/pages/home/index'
+            })
+          }, 1000)
         }).catch((e) => {
           console.log(e)
         })

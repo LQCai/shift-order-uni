@@ -71,9 +71,17 @@
         uni.removeStorageSync('userInfo')
         uni.removeStorageSync('loginInfo')
         uni.removeStorageSync('access_token')
-        uni.switchTab({
-          url: '/pages/home/index'
+        uni.showToast({
+          title: '退出成功!',
+          icon: 'none'
         })
+        setTimeout(() => {
+          uni.hideToast()
+          uni.switchTab({
+            url: '/pages/home/index'
+          })
+        }, 1000)
+
       }
 		}
 	}

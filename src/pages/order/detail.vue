@@ -61,8 +61,12 @@
     },
 		methods: {
       cancel () {
-        cancel({shiftOrderDetailId: this.form.id}).then(() => {
-          uni.switchTab({ url: '/pages/home/index' })
+        cancel({shiftOrderDetailId: this.form.id}).then((res) => {
+          uni.showToast({ title: res.msg, icon: 'none' })
+          setTimeout(() => {
+            uni.hideToast()
+            uni.switchTab({ url: '/pages/home/index' })
+          }, 1000)
         }).catch(err => {
           // ...
         })
