@@ -61,7 +61,7 @@
     },
 		methods: {
       cancel () {
-        cancel({ids: this.form.id}).then(() => {
+        cancel({shiftOrderDetailId: this.form.id}).then(() => {
           uni.switchTab({ url: '/pages/home/index' })
         }).catch(err => {
           // ...

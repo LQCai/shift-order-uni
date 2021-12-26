@@ -28,9 +28,7 @@
 		data() {
 			return {
 				swipers: [
-          "/static/images/product/index1.jpg",
-          "/static/images/product/index2.jpg",
-          "/static/images/product/index3.jpg"
+          "/static/images/product/banner.jfif"
 				],
         loginInfo: {}
 			}

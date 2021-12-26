@@ -35,7 +35,7 @@ export function recordList(query) {
 
 export function cancel(query) {
   return vue.$fly.request({
-    url: `/shift/shift-order-detail/remove`,
+    url: `/order/cancel`,
     method: 'POST',
     params: query
   })
