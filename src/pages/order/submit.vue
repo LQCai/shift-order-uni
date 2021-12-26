@@ -34,6 +34,7 @@
 
 <script>
   import ListCell from "../../components/list-cell/list-cell";
+  import {submit} from "../../api/order";
 
   export default {
     components: {ListCell},
@@ -64,7 +65,14 @@
         this.form.date = date.toISOString().slice(0, 10)
       },
       submit () {
-        console.log(this.form)
+        submit({shiftTemplateId: this.form.shiftId, date: this.form.date, remark: this.form.remark}).then(res => {
+          uni.showToast({ title: res.msg, icon: 'none', duration: 2000 })
+          uni.switchTab({
+            url: '/pages/home/index'
+          })
+        }).catch(err => {
+          // ...
+        })
       }
 		}
 	}

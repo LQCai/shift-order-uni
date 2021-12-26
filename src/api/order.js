@@ -16,3 +16,11 @@ export function shiftList(query) {
     params: query
   })
 }
+
+export function submit(query) {
+  return vue.$fly.request({
+    url: `/order/submit`,
+    method: 'POST',
+    params: query
+  })
+}
