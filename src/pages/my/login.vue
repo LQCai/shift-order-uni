@@ -66,6 +66,7 @@
           password: this.form.password
         }).then(res => {
           uni.setStorageSync('access_token', res.data.accessToken)
+          uni.setStorageSync('authority', res.data.authority)
           info().then((res) => {
             const userInfo = res.data
             if (userInfo.avatar === "") {

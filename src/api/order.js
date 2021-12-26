@@ -40,3 +40,11 @@ export function cancel(query) {
     params: query
   })
 }
+
+export function recordAllList(query) {
+  return vue.$fly.request({
+    url: `/shift/shift-order/list`,
+    method: 'GET',
+    params: query
+  })
+}

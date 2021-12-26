@@ -9,7 +9,7 @@
 		</swiper>
 		<view class="content">
 			<!-- section-1 begin -->
-			<view class="section-1">
+			<view class="section-1" v-if="adminRoles.indexOf(authority) === -1">
         <view class="item" @tap.stop="order">
           <image src="/static/images/home/home_icon_eatin.png" mode="widthFix"></image>
           <view class="wenyue-font">开始预约</view>
@@ -19,21 +19,33 @@
           <view class="wenyue-font">预约记录</view>
         </view>
 			</view>
+      <view class="section-2" v-else>
+        <view class="item" @tap.stop="admin">
+          <image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
+          <view class="wenyue-font">预约管理</view>
+        </view>
+      </view>
 		</view>
 	</view>
 </template>
 
 <script>
+  import website from "../../utils/website";
+
   export default {
 		data() {
 			return {
 				swipers: [
           "/static/images/product/banner.jfif"
-				]
+				],
+        authority: "",
+        adminRoles: "",
 			}
 		},
     onShow() {
+      this.adminRoles = website.adminRoles
       const accessToken = uni.getStorageSync('access_token')
+      this.authority = uni.getStorageSync("authority")
       if (!accessToken) {
         uni.switchTab({
           url: '/pages/my/index'
@@ -49,6 +61,11 @@
       recordList () {
         uni.navigateTo({
           url: "/pages/order/recordList"
+        })
+      },
+      admin () {
+        uni.navigateTo({
+          url: "/pages/order/admin"
         })
       }
 		}
@@ -117,91 +134,34 @@
 		}
 	}
 
-	.section-2 {
-		display: flex;
-		justify-content: space-between;
-		margin-bottom: 30rpx;
+  .section-2 {
+    position: relative;
+    background-color: $bg-color-white;
+    margin-top: -60rpx;
+    border-radius: $border-radius-lg;
+    padding: 60rpx 0;
+    display: flex;
+    margin-bottom: 30rpx;
+    box-shadow: $box-shadow;
 
-		.item {
-			width: 335rpx;
-			background-color: #EAEBEC;
-			padding: $spacing-row-lg 0;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			border-radius: $border-radius-lg;
+    .item {
+      flex: 1;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
 
-			.title {
-				width: 100%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: $font-size-lg;
+      image {
+        width: 100rpx;
+        margin-bottom: 20rpx;
+      }
 
-				image {
-					width: 60rpx;
-					height: 60rpx;
-					margin-right: 10rpx;
-				}
-			}
+      .wenyue-font {
+        font-size: 48rpx;
+        margin-bottom: 10rpx;
+      }
+    }
+  }
 
-			.tips {
-				color: $text-color-assist;
-				font-size: $font-size-base;
-			}
-		}
-	}
-
-	.section-3 {
-		margin-bottom: 30rpx;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		font-size: $font-size-base;
-		color: $text-color-assist;
-		padding: 0 10rpx;
-
-		.my-integral {
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-
-			.integrals {
-				display: flex;
-				align-items: center;
-				font-size: $font-size-lg;
-				color: $text-color-base;
-				margin-bottom: 10rpx;
-
-				.neutra-font {
-					margin-left: 10rpx;
-					font-size: 42rpx;
-				}
-			}
-		}
-
-		.my-code {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			padding: 0 30rpx;
-			position: relative;
-
-			image {
-				width: 60rpx;
-				height: 60rpx;
-				margin-bottom: $spacing-col-sm;
-			}
-
-			&:before {
-				content: " ";
-				position: absolute;
-				left: 0;
-				top: 0;
-				bottom: 0;
-				border-left: 1rpx solid rgba($color: $border-color, $alpha: 0.6);
-			}
-		}
-	}
 </style>

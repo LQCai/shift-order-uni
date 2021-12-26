@@ -9,7 +9,7 @@
 			<view class="member-card">
 				<view class="info">
 					<view class="title">
-						<view class="wenyue-font">{{ userInfo ? userInfo.code : '' }}</view>
+						<view class="wenyue-font">{{ userInfo ? userInfo.roleName : '' }}</view>
 					</view>
 					<image @tap="info" :src="userInfo.avatar" class="avatar"></image>
 				</view>
