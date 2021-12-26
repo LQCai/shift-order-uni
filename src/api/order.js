@@ -24,3 +24,11 @@ export function submit(query) {
     params: query
   })
 }
+
+export function recordList(query) {
+  return vue.$fly.request({
+    url: `/order/record-list`,
+    method: 'GET',
+    params: query
+  })
+}

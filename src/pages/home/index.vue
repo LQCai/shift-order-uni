@@ -14,10 +14,10 @@
           <image src="/static/images/home/home_icon_eatin.png" mode="widthFix"></image>
           <view class="wenyue-font">开始预约</view>
         </view>
-        <navigator class="item" open-type="navigate" url="/pages/addresses/addresses" hover-class="none">
+        <view class="item" @tap.stop="recordList">
           <image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
           <view class="wenyue-font">预约记录</view>
-        </navigator>
+        </view>
 			</view>
 		</view>
 	</view>
@@ -47,6 +47,11 @@
       order () {
         uni.navigateTo({
           url: "/pages/order/index"
+        })
+      },
+      recordList () {
+        uni.navigateTo({
+          url: "/pages/order/recordList"
         })
       }
 		}

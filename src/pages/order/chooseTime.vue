@@ -5,7 +5,7 @@
     </list-cell>
     <list-cell class="cell" v-for="shift in shiftList">
       <view class="item" @tap="submit(shift)">
-        <view class="wenyue-font">{{ shift.startTime }}</view>
+        <view class="wenyue-font">{{ shift.startTime.slice(0, 5) }}</view>
       </view>
     </list-cell>
 	</view>

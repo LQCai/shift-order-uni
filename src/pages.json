@@ -47,6 +47,12 @@
 			"navigationBarTitleText": "班车预约",
 			"navigationStyle": "custom"
 		}
+	}, {
+		"path": "pages/order/recordList",
+		"style": {
+			"navigationBarTitleText": "预约记录",
+			"navigationStyle": "custom"
+		}
 	}],
 	"tabBar": {
 		"color": "#999999",

@@ -67,8 +67,8 @@
       submit () {
         submit({shiftTemplateId: this.form.shiftId, date: this.form.date, remark: this.form.remark}).then(res => {
           uni.showToast({ title: res.msg, icon: 'none', duration: 2000 })
-          uni.switchTab({
-            url: '/pages/home/index'
+          uni.navigateTo({
+            url: '/pages/order/recordList'
           })
         }).catch(err => {
           // ...
