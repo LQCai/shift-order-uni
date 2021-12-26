@@ -60,15 +60,12 @@
         if (!userInfo) {
           info().then((res) => {
             userInfo = res.data
-            uni.setStorageSync("userInfo", res.data)
+            uni.setStorageSync("userInfo", userInfo)
           }).catch((err) => {
             console.log(err)
           })
         }
         this.form = userInfo
-        if (this.form.avatar === "") {
-          this.form.avatar = uni.getStorageSync("loginInfo").avatar
-        }
       },
       logout() {
         uni.removeStorageSync('userInfo')

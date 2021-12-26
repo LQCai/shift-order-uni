@@ -24,6 +24,7 @@
 <script>
 	import modal from '@/components/modal/modal.vue'
   import {info, loginByPassword} from "../../api/common";
+  import website from "../../utils/website";
 
 	export default {
 		components: {
@@ -64,10 +65,13 @@
           account: this.form.account,
           password: this.form.password
         }).then(res => {
-          uni.setStorageSync('loginInfo', res.data)
           uni.setStorageSync('access_token', res.data.accessToken)
           info().then((res) => {
-            uni.setStorageSync('userInfo', res.data)
+            const userInfo = res.data
+            if (userInfo.avatar === "") {
+              userInfo.avatar = website.defaultAvatar
+            }
+            uni.setStorageSync('userInfo', userInfo)
           }).catch((err) => {
             console.log(err)
           })

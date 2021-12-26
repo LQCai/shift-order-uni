@@ -29,13 +29,12 @@
 			return {
 				swipers: [
           "/static/images/product/banner.jfif"
-				],
-        loginInfo: {}
+				]
 			}
 		},
     onShow() {
-      this.loginInfo = uni.getStorageSync('loginInfo')
-      if (this.loginInfo === {} || this.loginInfo === '') {
+      const accessToken = uni.getStorageSync('access_token')
+      if (!accessToken) {
         uni.switchTab({
           url: '/pages/my/index'
         })

@@ -9,23 +9,13 @@
 			<view class="member-card">
 				<view class="info">
 					<view class="title">
-						<view class="wenyue-font">{{ userInfo ? userInfo.roleName : '' }}</view>
+						<view class="wenyue-font">{{ userInfo ? userInfo.code : '' }}</view>
 					</view>
 					<image @tap="info" :src="userInfo.avatar" class="avatar"></image>
 				</view>
 			</view>
 			<!-- member card end -->
 		</view>
-		<list-cell hover arrow>
-			<view class="list-cell-wrapper">
-				<view view="title">联系客服</view>
-			</view>
-		</list-cell>
-		<list-cell hover arrow last>
-			<view class="list-cell-wrapper">
-				<view view="title">更多</view>
-			</view>
-		</list-cell>
 		<!-- 登录popup -->
 		<login-popup ref="loginPopup"></login-popup>
 	</view>
@@ -35,6 +25,7 @@
 	import listCell from '@/components/list-cell/list-cell.vue'
 	import loginPopup from './components/login-popup.vue'
 	import { mapState } from 'vuex'
+  import website from "../../utils/website";
 
 	export default {
 		components: {
@@ -50,14 +41,11 @@
 			...mapState(['isLogin'])
 		},
     onShow() {
-      const loginInfo = uni.getStorageSync('loginInfo')
-      if (Object.keys(loginInfo).length === 0) {
+      const accessToken = uni.getStorageSync('access_token')
+      if (!accessToken) {
         this.openLoginPopup()
       }
       this.userInfo = uni.getStorageSync('userInfo')
-      if (this.userInfo.avatar === "") {
-        this.userInfo.avatar = loginInfo.avatar
-      }
     },
 		methods: {
 			openLoginPopup() {
