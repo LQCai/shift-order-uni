@@ -35,6 +35,15 @@ fly.interceptors.response.use(
 			return res
 		} else {
 			uni.showToast({ title: res.msg, icon: 'none' })
+			//如果是401则跳转到首页（首页会判定是否需要登录）
+			if (status === 401) {
+				uni.removeStorageSync('loginInfo')
+				uni.removeStorageSync('access_token')
+				uni.removeStorageSync('userInfo')
+				uni.switchTab({
+					url: '/pages/home/index'
+				})
+			}
 			return Promise.resolve({
 				isError: true,
 				errorMsg: res.msg,
