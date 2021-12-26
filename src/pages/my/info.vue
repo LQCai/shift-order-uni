@@ -12,6 +12,12 @@
 			</list-cell>
       <list-cell line-right padding="30rpx">
         <view class="form-item">
+          <view class="label">工号</view>
+          <input type="text" v-model="form.code" disabled="disabled" />
+        </view>
+      </list-cell>
+      <list-cell line-right padding="30rpx">
+        <view class="form-item">
           <view class="label">姓名</view>
           <input type="text" v-model="form.name" disabled="disabled" />
         </view>
@@ -25,7 +31,7 @@
 		</view>
 
 		<view class="save-btn">
-			<button type="info">解除绑定</button>
+			<button type="info" @click="logout">退出登录</button>
 		</view>
 	</view>
 </template>
@@ -63,6 +69,14 @@
         if (this.form.avatar === "") {
           this.form.avatar = uni.getStorageSync("loginInfo").avatar
         }
+      },
+      logout() {
+        uni.removeStorageSync('userInfo')
+        uni.removeStorageSync('loginInfo')
+        uni.removeStorageSync('access_token')
+        uni.switchTab({
+          url: '/pages/home/index'
+        })
       }
 		}
 	}
