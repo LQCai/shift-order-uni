@@ -70,11 +70,7 @@
       },
       toDetail(order) {
         uni.navigateTo({
-          url: `/pages/order/detail?id=${order.id}&intervalName=${order.intervalName}
-          &date=${order.date}
-          &startTime=${order.startTime}
-          &createTime=${order.createTime}
-          &remark=${order.remark}`
+          url: `/pages/order/adminDetail?id=${order.id}`
         })
       }
 		},

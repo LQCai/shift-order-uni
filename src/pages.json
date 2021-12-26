@@ -65,6 +65,12 @@
 			"navigationBarTitleText": "预约管理",
 			"navigationStyle": "custom"
 		}
+	}, {
+		"path": "pages/order/adminDetail",
+		"style": {
+			"navigationBarTitleText": "预约详情",
+			"navigationStyle": "custom"
+		}
 	}],
 	"tabBar": {
 		"color": "#999999",

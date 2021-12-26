@@ -48,3 +48,11 @@ export function recordAllList(query) {
     params: query
   })
 }
+
+export function recordAllDetailList(query) {
+  return vue.$fly.request({
+    url: `shift/shift-order-detail/list`,
+    method: 'GET',
+    params: query
+  })
+}
