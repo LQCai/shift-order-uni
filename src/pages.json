@@ -53,6 +53,12 @@
 			"navigationBarTitleText": "预约记录",
 			"navigationStyle": "custom"
 		}
+	}, {
+		"path": "pages/order/detail",
+		"style": {
+			"navigationBarTitleText": "预约详情",
+			"navigationStyle": "custom"
+		}
 	}],
 	"tabBar": {
 		"color": "#999999",

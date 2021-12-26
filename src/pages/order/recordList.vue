@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
     <list-cell class="cell" v-for="order in orderList">
-      <view class="item">
+      <view class="item" @tap="toDetail(order)">
         <view class="wenyue-font">预约区间: {{ order.intervalName }}</view>
         <view class="wenyue-font">预约日期: {{ order.date }}</view>
         <view class="wenyue-font">预约时间: {{ order.startTime.slice(0, 5) }}</view>
@@ -40,6 +40,15 @@
           this.pages = res.data.pages
         }).catch(err => {
           // ...
+        })
+      },
+      toDetail(order) {
+        uni.navigateTo({
+          url: `/pages/order/detail?id=${order.id}&intervalName=${order.intervalName}
+          &date=${order.date}
+          &startTime=${order.startTime}
+          &createTime=${order.createTime}
+          &remark=${order.remark}`
         })
       }
 		},
