@@ -10,7 +10,11 @@
       <list-cell line-right padding="30rpx">
         <view class="form-item">
           <view class="label">预约日期</view>
-          <input type="text" v-model="form.date" disabled="disabled" />
+          <view>
+            <picker class="flex-fill" mode="date" :start="form.startDate" :end="form.endDate" :value="form.date" @change="handleDateChange">
+              <view>{{ form.date }}</view>
+            </picker>
+          </view>
         </view>
       </list-cell>
       <list-cell line-right padding="30rpx">
@@ -19,7 +23,7 @@
           <input type="text" v-model="form.time" disabled="disabled" />
         </view>
       </list-cell>
-      <list-cell line-right padding="30rpx">
+      <list-cell line-right padding="30rpx" last>
         <view class="form-item">
           <view class="label">预约备注</view>
           <input type="text" v-model="form.remark"  @change="handleRemarkChange" />
@@ -56,6 +60,9 @@
       this.getDate()
     },
 		methods: {
+      handleDateChange ({target: {value}}) {
+        this.form.date = value
+      },
       handleRemarkChange({target: {value}}) {
         this.form.remark = value
       },
@@ -63,6 +70,9 @@
         let date = new Date();
         date.setDate(date.getDate() + 1);
         this.form.date = date.toISOString().slice(0, 10)
+        this.form.startDate = date.toISOString().slice(0, 10)
+        date.setDate(date.getDate() + 2);
+        this.form.endDate = date.toISOString().slice(0, 10)
       },
       submit () {
         submit({shiftTemplateId: this.form.shiftId, date: this.form.date, remark: this.form.remark}).then(res => {

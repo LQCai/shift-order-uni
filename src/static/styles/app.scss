@@ -49,35 +49,35 @@ button {
 	font-size: $font-size-base;
 	border-radius: $border-radius-sm;
 	margin: 0;
-	
+
 	&:after {
 		border: 0;
 	}
-	
+
 	&[type='primary'] {
 		background-color: $color-primary;
-		
+
 		&[plain] {
 			background-color: $bg-color-white;
 			border: 2rpx solid $color-primary;
 			color: $color-primary;
 		}
-		
+
 		&.button-hover {
 			background-color: rgba($color: $color-primary, $alpha: 0.6);
 		}
 	}
-	
+
 	&[type='default'] {
 		color: $text-color-grey !important;
 		border: 2rpx solid #ccc !important;
 		background-color: $bg-color-white;
 	}
-	
+
 	&[type='info'] {
 		background-color: #343434;
 		color: $bg-color-white !important;
-		
+
 		&.button-hover, &[disabled] {
 			background-color: rgba($color: #343434, $alpha: 0.6);
 		}
@@ -94,7 +94,7 @@ uni-toast {
 }
 
 .uni-mask {
-	z-index: 10000;
+	z-index: 999;
 }
 
 uni-modal .uni-modal {
