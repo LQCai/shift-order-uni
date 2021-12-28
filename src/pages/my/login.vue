@@ -15,6 +15,10 @@
       </list-cell>
 		</view>
 
+    <view @tap="navigateToRegister">
+      <view class="font-size-base text-color-assist" style="margin-top: 30rpx; margin-right: 30rpx; text-align: right">申请注册</view>
+    </view>
+
 		<view class="save-btn">
 			<button type="info" @click="login">登录</button>
 		</view>
@@ -40,6 +44,11 @@
 
     },
 		methods: {
+      navigateToRegister() {
+        uni.navigateTo({
+          url: '/pages/my/register'
+        })
+      },
       handleAccountChange({target: {value}}) {
         this.form.account = value
       },
@@ -170,6 +179,12 @@
 			right: 0;
 		}
 	}
+
+  .register {
+    padding: 0 30rpx;
+    margin-top: 20rpx;
+    text-align: right;
+  }
 
 	.tips {
 		color: $text-color-grey;

@@ -1,54 +1,51 @@
 <template>
 	<view class="container">
-		<view class="brand">
-			<image :src="form.avatarUrl" class="avatar"></image>
-		</view>
 		<view class="user-form">
 			<list-cell line-right padding="30rpx">
 				<view class="form-item">
-					<view class="label">昵称</view>
-					<input type="text" v-model="form.nickName" @change="handleNickNameChange"/>
+					<view class="label">姓名</view>
+					<input type="text" v-model="form.name" placeholder="请输入姓名" @change="handleNameChange"/>
 				</view>
 			</list-cell>
+      <list-cell line-right padding="30rpx">
+        <view class="form-item">
+          <view class="label">工号</view>
+          <input type="text" v-model="form.code" placeholder="请输入工号(登录账号)" @change="handleCodeChange"/>
+        </view>
+      </list-cell>
 			<list-cell line-right padding="30rpx">
 				<view class="form-item">
 					<view class="label">手机号码</view>
-					<input type="number" v-model="form.telephone" placeholder="请输入手机号码" @change="handleTelChange" />
+					<input type="number" v-model="form.phone" placeholder="请输入手机号码" @change="handleTelChange" />
 				</view>
 			</list-cell>
-			<list-cell line-right padding="30rpx">
-				<view class="form-item">
-					<view class="label">性别</view>
-					<view class="radio" @tap="form.gender = 1">
-						<image :src="!form.gender ? '/static/images/common/gouxuankuang.png' : '/static/images/common/round-black-selected.png'"></image>
-						<view>男</view>
-					</view>
-					<view class="radio" @tap="form.gender = 0">
-						<image :src="form.gender ? '/static/images/common/gouxuankuang.png' : '/static/images/common/round-black-selected.png'"></image>
-						<view>女</view>
-					</view>
-				</view>
-			</list-cell>
-			<list-cell line-right padding="30rpx" last>
-				<view class="form-item">
-					<view class="label">生日</view>
-					 <picker class="flex-fill" mode="date" :value="form.birthday" @change="handleBirthdayChange">
-						<view>{{ form.birthday }}</view>
-					</picker>
-          <view><text style="color: lightgray">生日设置后不可修改</text></view>
+      <list-cell line-right padding="30rpx">
+        <view class="form-item">
+          <view class="label">密码</view>
+          <input type="password" v-model="form.password" placeholder="请输入密码" @change="handlePasswordChange" />
         </view>
-			</list-cell>
+      </list-cell>
+      <list-cell line-right padding="30rpx">
+        <view class="form-item">
+          <view class="label">所属角色</view>
+          <view>
+            <picker class="flex-fill" :value="index" :range="roles" :range-key="'displayName'" @change="handleRoleChange">
+              <view>{{ roles[index].displayName }}</view>
+            </picker>
+          </view>
+        </view>
+      </list-cell>
 		</view>
 
 		<view class="save-btn">
-			<button type="info" @click="save">保存</button>
+			<button type="info" @click="submit">提交</button>
 		</view>
 	</view>
 </template>
 
 <script>
 	import modal from '@/components/modal/modal.vue'
-  import {checkUniquePhone, signUp, login} from "../../api/common";
+  import {register} from "@/api/common";
 
 	export default {
 		components: {
@@ -56,8 +53,25 @@
 		},
 		data() {
 			return {
-				form: {},
-				countdown: 0
+				countdown: 0,
+        index: 0,
+        roles: [
+          {
+            code: 'rail_driver',
+            displayName: '动车司机'
+          },
+          {
+            code: 'shuttle_driver',
+            displayName: '班车司机'
+          }
+        ],
+        form: {
+          name: '',
+          code: '',
+          phone: '',
+          password: '',
+          role: 0
+        }
 			}
 		},
     onLoad(options) {
@@ -70,47 +84,43 @@
       }
     },
 		methods: {
-			handleBirthdayChange({target: {value}}) {
-        this.form.birthday = value
-        this.$forceUpdate()
+      handleRoleChange({target: {value}}) {
+        this.form.role = value
 			},
       handleTelChange({target: {value}}) {
         this.form.telephone = value
       },
-      handleNickNameChange({target: {value}}) {
-        this.form.nickName = value
+      handlePasswordChange({target: {value}}) {
+        this.form.password = value
       },
-      save() {
-        if (!this.validateTelephone(this.form.telephone)) {
+      handleNameChange({target: {value}}) {
+        this.form.name = value
+      },
+      handleCodeChange({target: {value}}) {
+        this.form.code = value
+      },
+      submit() {
+        if (!this.validateTelephone(this.form.phone)) {
           return uni.showToast({
             title: '请填写正确的手机号码!',
             icon: 'none'
           })
         }
-        checkUniquePhone({phone: this.form.telephone}).then(res => {
-          const exist = res.data
-          if (exist) {
-            return uni.showToast({
-              title: '您输入的手机号已存在!',
-              icon: 'none'
+        this.form.roleId = this.roles[this.form.role].code
+        const params = this.form
+        register(params).then(res => {
+          uni.showToast({
+            title: res.msg,
+            icon: "none"
+          })
+          setTimeout(() => {
+            uni.hideToast()
+            uni.switchTab({
+              url: '/pages/home/index'
             })
-          } else {
-            signUp(this.form).then(() => {
-              login({openId: uni.getStorageSync('openId')}).then(res => {
-                uni.setStorageSync('userInfo', res.data)
-                uni.setStorageSync('access_token', res.data.accessToken)
-                uni.showToast({
-                  title: '信息录入成功!',
-                  icon: 'none'
-                })
-              }).catch((e) => {
-                console.log(e)
-              })
-              uni.switchTab({
-                url: '/pages/home/home'
-              })
-            })
-          }
+          }, 1000)
+        }).catch(err => {
+          // ...
         })
       },
       validateTelephone(telephone) {

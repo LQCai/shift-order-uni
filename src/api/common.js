@@ -38,3 +38,11 @@ export function updateInfo(query) {
     data: query
   })
 }
+
+export function register(query) {
+  return vue.$fly.request({
+    url: `/common/register`,
+    method: 'POST',
+    data: query
+  })
+}
