@@ -18,11 +18,19 @@
           <image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
           <view class="wenyue-font">预约记录</view>
         </view>
+        <view class="item" @tap.stop="shiftTable">
+          <image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
+          <view class="wenyue-font">班车时刻表</view>
+        </view>
 			</view>
       <view class="section-2" v-else>
         <view class="item" @tap.stop="admin">
           <image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
           <view class="wenyue-font">预约管理</view>
+        </view>
+        <view class="item" @tap.stop="shiftTable">
+          <image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
+          <view class="wenyue-font">班车时刻表</view>
         </view>
       </view>
 		</view>
@@ -66,6 +74,11 @@
       admin () {
         uni.navigateTo({
           url: "/pages/order/admin"
+        })
+      },
+      shiftTable() {
+        uni.navigateTo({
+          url: "/pages/order/shiftTable"
         })
       }
 		}

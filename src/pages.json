@@ -71,6 +71,12 @@
 			"navigationBarTitleText": "预约详情",
 			"navigationStyle": "custom"
 		}
+	}, {
+		"path": "pages/order/shiftTable",
+		"style": {
+			"navigationBarTitleText": "班车时刻表",
+			"navigationStyle": "custom"
+		}
 	}],
 	"tabBar": {
 		"color": "#999999",

@@ -6,6 +6,7 @@
         <view class="wenyue-font">预约区间: {{ order.intervalName }}</view>
         <view class="wenyue-font">预约日期: {{ order.date }}</view>
         <view class="wenyue-font">预约时间: {{ order.startTime.slice(0, 5) }}</view>
+        <view class="wenyue-font">预约人数: {{ order.activeOrderCount }}</view>
       </view>
     </list-cell>
     <view class="item" v-if="isLoadAll" style="text-align: center">{{ loadingTxt }}</view>

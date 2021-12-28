@@ -46,3 +46,10 @@ export function register(query) {
     data: query
   })
 }
+
+export function shiftTable() {
+  return vue.$fly.request({
+    url: `/common/shift-table`,
+    method: 'GET'
+  })
+}
