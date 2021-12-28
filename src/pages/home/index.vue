@@ -19,7 +19,7 @@
           <view class="wenyue-font">预约记录</view>
         </view>
         <view class="item" @tap.stop="shiftTable">
-          <image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
+          <image src="/static/images/home/order.png" mode="widthFix"></image>
           <view class="wenyue-font">班车时刻表</view>
         </view>
 			</view>
@@ -29,7 +29,7 @@
           <view class="wenyue-font">预约管理</view>
         </view>
         <view class="item" @tap.stop="shiftTable">
-          <image src="/static/images/home/home_icon_waimai1.png" mode="widthFix"></image>
+          <image src="/static/images/home/order.png" mode="widthFix"></image>
           <view class="wenyue-font">班车时刻表</view>
         </view>
       </view>
@@ -134,6 +134,15 @@
 				width: 2rpx;
 				background-color: $border-color;
 			}
+      &:nth-child(2):after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 2rpx;
+        background-color: $border-color;
+      }
 
 			image {
 				width: 100rpx;
@@ -164,6 +173,16 @@
       flex-direction: column;
       align-items: center;
       position: relative;
+
+      &:nth-child(1):after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 2rpx;
+        background-color: $border-color;
+      }
 
       image {
         width: 100rpx;
