@@ -26,20 +26,44 @@
 				<view class="form-item">
 					<view class="label">手机号码</view>
 					<input type="text" v-model="form.phone" disabled="disabled" />
-				</view>
+          <button type="default" plain class="font-size-sm" @tap="showTelephoneModal">更换手机</button>
+        </view>
 			</list-cell>
 		</view>
 
 		<view class="save-btn">
 			<button type="info" @click="logout">退出登录</button>
 		</view>
+
+    <modal :show="telephoneModalVisible" custom padding="40rpx 30rpx">
+      <view class="telphone-modal">
+        <view class="header">
+          <view>温馨提示</view>
+          <image src="/static/images/common/closex.png" class="close-icon" @tap="closeTelephoneModal"></image>
+        </view>
+        <view class="tips">
+          为保障您正常使用，请输入您的常用手机号。
+        </view>
+        <view class="telphone-form">
+          <list-cell padding="30rpx 0">
+            <view class="telphone-input">
+              <view class="prefix">+86</view>
+              <input type="number" v-model="telephoneChange" placeholder="请填写有效手机号码" placeholder-class="font-size-base text-color-assist" @change="handleTelephoneChange"/>
+            </view>
+          </list-cell>
+        </view>
+        <view class="footer">
+          <button type="primary" @tap="submitChangeTelephone">确认</button>
+        </view>
+      </view>
+    </modal>
 	</view>
 </template>
 
 <script>
 	import listCell from '@/components/list-cell/list-cell.vue'
 	import modal from '@/components/modal/modal.vue'
-  import {info} from "../../api/common";
+  import {info, updateInfo} from "../../api/common";
 
 	export default {
 		components: {
@@ -48,13 +72,40 @@
 		},
 		data() {
 			return {
-				form: {}
+				form: {},
+        telephoneModalVisible: false,
+        telephoneChange: ''
 			}
 		},
     onShow() {
       this.getUserInfo()
     },
 		methods: {
+      handleTelephoneChange({target: {value}}) {
+        this.telephoneChange = value
+      },
+      showTelephoneModal() {
+        this.telephoneModalVisible = true
+      },
+      closeTelephoneModal() {
+        this.telephoneModalVisible = false
+      },
+      submitChangeTelephone() {
+        const userInfo = uni.getStorageSync('userInfo')
+        updateInfo({phone: this.telephoneChange, id: userInfo.id}).then(res => {
+          uni.showToast({
+            title: res.msg,
+            icon: "none"
+          })
+          setTimeout(() => {
+            uni.hideToast()
+            this.form.phone = this.telephoneChange
+            userInfo.phone = this.telephoneChange
+            uni.setStorageSync('userInfo', userInfo)
+            this.telephoneModalVisible = false
+          }, 1000)
+        })
+      },
       getUserInfo() {
         let userInfo = uni.getStorageSync("userInfo")
         if (!userInfo) {

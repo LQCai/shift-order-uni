@@ -30,3 +30,11 @@ export function info() {
     method: 'GET'
   })
 }
+
+export function updateInfo(query) {
+  return vue.$fly.request({
+    url: `/blade-user/update`,
+    method: 'POST',
+    data: query
+  })
+}
