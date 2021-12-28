@@ -100,14 +100,20 @@
         this.form.code = value
       },
       submit() {
-        if (!this.validateTelephone(this.form.phone)) {
+        this.form.roleId = this.roles[this.form.role].code
+        const params = this.form
+        if (params.name === '' || params.password === '' || params.code === '') {
+          return uni.showToast({
+            title: '表单不可为空',
+            icon: "none"
+          })
+        }
+        if (!this.validateTelephone(params.phone)) {
           return uni.showToast({
             title: '请填写正确的手机号码!',
             icon: 'none'
           })
         }
-        this.form.roleId = this.roles[this.form.role].code
-        const params = this.form
         register(params).then(res => {
           uni.showToast({
             title: res.msg,
@@ -122,6 +128,26 @@
         }).catch(err => {
           // ...
         })
+      },
+      validateEmpty(params) {
+        if (params.name === '') {
+          return uni.showToast({
+            title: '姓名不可为空',
+            icon: "none"
+          })
+        }
+        if (params.code === '') {
+          return uni.showToast({
+            title: '工号不可为空',
+            icon: "none"
+          })
+        }
+        if (params.password === '') {
+          return uni.showToast({
+            title: '密码不可为空',
+            icon: "none"
+          })
+        }
       },
       validateTelephone(telephone) {
         const	reg=/^1(3\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\d|9[0-35-9])\d{8}$/;

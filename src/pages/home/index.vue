@@ -36,7 +36,7 @@
 		data() {
 			return {
 				swipers: [
-          "/static/images/product/banner.jfif"
+          "https://img2.baidu.com/it/u=2564130430,1497730473&fm=26&fmt=auto"
 				],
         authority: "",
         adminRoles: "",
