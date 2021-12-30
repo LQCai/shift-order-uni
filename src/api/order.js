@@ -9,6 +9,13 @@ export function intervalList() {
   })
 }
 
+export function intervalStartList() {
+  return vue.$fly.request({
+    url: `/order/interval-start-list`,
+    method: 'GET'
+  })
+}
+
 export function shiftList(query) {
   return vue.$fly.request({
     url: `/order/shift-list`,

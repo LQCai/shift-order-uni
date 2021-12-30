@@ -1,6 +1,19 @@
 <template>
 	<view class="container">
-    <sl-filter :ref="'slFilter'" :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
+    <view class="select-form">
+      <list-cell line-right padding="30rpx">
+        <view class="form-item">
+          <view class="label">筛选日期</view>
+          <view>
+            <picker class="flex-fill" mode="date" :value="date" @change="handleDateChange">
+              <view>{{ date }}</view>
+            </picker>
+          </view>
+        </view>
+      </list-cell>
+      <sl-filter :ref="'slFilter'" :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
+    </view>
+
     <list-cell class="cell" v-for="order in orderList">
       <view class="item" @tap="toDetail(order)">
         <view class="wenyue-font">预约区间: {{ order.intervalName }}</view>
@@ -16,21 +29,23 @@
 <script>
   import ListCell from "../../components/list-cell/list-cell";
   import slFilter from '@/components/sl-filter/sl-filter.vue';
-  import {intervalList, recordAllList} from "../../api/order";
+  import {intervalStartList, recordAllList} from "../../api/order";
 
   export default {
     components: {ListCell, slFilter},
     data() {
 			return {
-        selectTitle: "区间选择",
+        date: '2022-01-01',
+        selectTitle: "时刻选择",
         themeColor: '#000000',
         menuList: [{
-          'title': '区间选择',
-          'detailTitle': '请选择区间',
+          'title': '时刻选择',
+          'detailTitle': '请选择时刻',
           "defaultSelectedIndex": 0,
           'key': 'default',
           'detailList': []
         }],
+        timeList: [],
         orderList: [],
         paramsData: {
           current: 1,
@@ -42,12 +57,14 @@
 			}
 		},
     onLoad() {
-      intervalList().then(res => {
+      intervalStartList().then(res => {
         const intervalList = res.data
+        this.timeList = intervalList
+        console.log(this.timeList)
         intervalList.map(item => {
           this.menuList[0]["detailList"].push({
-            'title': item.name,
-            'value': item.id
+            'title': item.value,
+            'value': item.key
           })
         })
       }).catch(err => {
@@ -105,6 +122,24 @@
 
   .cell {
     justify-content: center;
+  }
+
+  .select-form {
+    .form-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      .label {
+        margin-left: 14%;
+        font-size: 14px;
+        width: 160rpx;
+      }
+
+      input {
+        flex: 1;
+      }
+    }
   }
 
   .item {
