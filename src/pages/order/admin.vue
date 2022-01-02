@@ -30,6 +30,7 @@
   import ListCell from "../../components/list-cell/list-cell";
   import slFilter from '@/components/sl-filter/sl-filter.vue';
   import {intervalStartList, recordAllList} from "../../api/order";
+  import {formatTimeDate} from "@/utils";
 
   export default {
     components: {ListCell, slFilter},
@@ -57,10 +58,10 @@
 			}
 		},
     onLoad() {
+      this.date = formatTimeDate(new Date().getTime(), 'yyyy-MM-dd')
       intervalStartList().then(res => {
         const intervalList = res.data
         this.timeList = intervalList
-        console.log(this.timeList)
         intervalList.map(item => {
           this.menuList[0]["detailList"].push({
             'title': item.value,
@@ -70,11 +71,18 @@
       }).catch(err => {
         // ...
       })
+      this.paramsData.date = this.date
       this.getRecordList()
     },
 		methods: {
+      handleDateChange: function(e) {
+        this.date = e.target.value
+        this.paramsData.date = e.target.value
+        this.orderList = []
+        this.getRecordList()
+      },
       result(val) {
-        this.paramsData.intervalId = val.default
+        this.paramsData.shiftBindKey = val.default
         this.orderList = []
         this.getRecordList()
       },
