@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<image class="w-100" src="http://celery.chuqinbao.top/background.png" mode="widthFix"></image>
+		<image class="w-100" src="http://celery.chuqinbao.top/background.jpg" mode="widthFix"></image>
 		<view class="content">
 			<view class="welcome">
 				<view>你好 {{ userInfo ? userInfo.name : '立即登录' }}</view>

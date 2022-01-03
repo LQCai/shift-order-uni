@@ -44,7 +44,12 @@
           'detailTitle': '请选择时刻',
           "defaultSelectedIndex": 0,
           'key': 'default',
-          'detailList': []
+          'detailList': [
+            {
+              'title': '不限',
+              'value': ''
+            }
+          ]
         }],
         timeList: [],
         orderList: [],
