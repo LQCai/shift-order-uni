@@ -11,7 +11,16 @@
           </view>
         </view>
       </list-cell>
-      <sl-filter :ref="'slFilter'" :themeColor="themeColor" :menuList="menuList" @result="result"></sl-filter>
+      <list-cell line-right padding="30rpx">
+        <view class="form-item">
+          <view class="label">筛选时刻</view>
+          <view>
+            <picker class="flex-fill" :value="index" :range="timeList" :range-key="'value'" @change="handleTimeChange">
+              <view>{{ timeList[index].value }}</view>
+            </picker>
+          </view>
+        </view>
+      </list-cell>
     </view>
 
     <list-cell class="cell" v-for="order in orderList">
@@ -51,7 +60,13 @@
             }
           ]
         }],
-        timeList: [],
+        index: 0,
+        timeList: [
+          {
+            'key': '',
+            'value': '不限'
+          }
+        ],
         orderList: [],
         paramsData: {
           current: 1,
@@ -66,12 +81,8 @@
       this.date = formatTimeDate(new Date().getTime(), 'yyyy-MM-dd')
       intervalStartList().then(res => {
         const intervalList = res.data
-        this.timeList = intervalList
         intervalList.map(item => {
-          this.menuList[0]["detailList"].push({
-            'title': item.value,
-            'value': item.key
-          })
+          this.timeList.push(item)
         })
       }).catch(err => {
         // ...
@@ -80,14 +91,15 @@
       this.getRecordList()
     },
 		methods: {
-      handleDateChange: function(e) {
-        this.date = e.target.value
-        this.paramsData.date = e.target.value
+      handleTimeChange({target: {value}}) {
+        this.index = value
+        this.paramsData.shiftBindKey = this.timeList[value].key
         this.orderList = []
         this.getRecordList()
       },
-      result(val) {
-        this.paramsData.shiftBindKey = val.default
+      handleDateChange: function(e) {
+        this.date = e.target.value
+        this.paramsData.date = e.target.value
         this.orderList = []
         this.getRecordList()
       },
