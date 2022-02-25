@@ -68,10 +68,10 @@
       },
       getDate () {
         let date = new Date();
-        date.setDate(date.getDate() + 1);
+        date.setDate(date.getDate());
         this.form.date = date.toISOString().slice(0, 10)
         this.form.startDate = date.toISOString().slice(0, 10)
-        date.setDate(date.getDate() + 2);
+        date.setDate(date.getDate() + 3);
         this.form.endDate = date.toISOString().slice(0, 10)
       },
       submit () {
